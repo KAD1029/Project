@@ -1,0 +1,12 @@
+a = 5
+b=2.5
+c= "abc"
+d ='d'
+
+for i in range(2):
+	if a==3 :
+		print(a,"ab",'s')
+	else:
+		continue
+
+e=a+b/d*k

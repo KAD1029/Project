@@ -11,7 +11,6 @@ enum TokenType {//Это приблительный список, возможно здесь есть что-то лишее или
 
         // keyword
         PRINT,
-        PRINTLN,
         IF,
         ELSE,
         WHILE,
@@ -23,6 +22,8 @@ enum TokenType {//Это приблительный список, возможно здесь есть что-то лишее или
         RETURN,
         CLASS,
         NEW,
+		IN,
+		RANGE,
 
 		DOUBLE_QUOTE, //"
 		QUOTE, //'

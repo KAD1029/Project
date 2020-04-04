@@ -15,4 +15,16 @@ public:
 		name = _name;
 		type = _type;
 	}
+
+	Token(const Token& a)
+	{
+		name = a.name;
+		type = a.type;
+	}
+
+	Token()
+	{
+		name = "";
+		type = TokenType(0);
+	}
 };

@@ -20,7 +20,6 @@ class Tokenizer {
 
 		// keyword
 		"print",
-		"println",
 		"if",
 		"else",
 		"while",
@@ -32,6 +31,8 @@ class Tokenizer {
 		"return",
 		"class",
 		"new",
+		"in",
+		"range",
 
 		"\"",
 		"'",
@@ -171,7 +172,7 @@ class Tokenizer {
 
 		if (token[0] == '_' || (token[0] >= 'a' && token[0] <= 'z') || (token[0] >= 'A' && token[0] <= 'Z'))
 		{
-			for (int i = 1; i < token.size(); i++)
+			for (int i = 0; i < token.size(); i++)
 			{
 				if (!(token[i] == '_' || (token[i] >= 'a' && token[i] <= 'z') || (token[i] >= 'A' && token[i] <= 'Z') || (token[i] >= '0' && token[i] <= '9')))
 				{
@@ -181,6 +182,7 @@ class Tokenizer {
 			}
 			tokens_vec.push_back(Token(token, TokenType(4)));
 			variables_list.push_back(token);
+			return;
 		}
 		else
 		{
@@ -257,7 +259,6 @@ public:
 					push_back(tmp, 3);
 					push_back('"');
 					tmp = "";
-					i++;
 					continue;
 				}
 
@@ -274,9 +275,9 @@ public:
 					if (i >= current_string.size() || current_string[i] != 39)
 						throw 1;
 					push_back(current_string[i]);
-					i++;
 					continue;
 				}
+
 
 				if (sym == '$' || sym == '_' || (sym >= '0' && sym <= '9') || (sym >= 'a' && sym <= 'z') || (sym >= 'A' && sym <= 'Z') || sym == '.')
 				{
@@ -294,9 +295,16 @@ public:
 					tmp += sym;
 				}
 
-				else if (sym == '=' || sym == '+' || sym == '-' || sym == '*' || sym == '/' || sym == '(' || sym == ')' || sym == '!' || sym == '<' || sym == '>' || 
-					     sym == '%' || sym == '&' || sym == '^' || sym == ':' || sym == '|' || sym == '.' || sym == ',' || sym == '?' || sym == '~' || sym == '[' || 
-						 sym == ']' || sym == '{' || sym == '}')
+				else if (sym == '(' || sym == ')' || sym == '[' || sym == ']' || sym == '{' || sym == '}')
+				{
+					push_back(tmp);
+					tmp = "";
+					status = 2;
+					push_back(sym);
+				}
+
+				else if (sym == '=' || sym == '+' || sym == '-' || sym == '*' || sym == '/' || sym == '!' || sym == '<' || sym == '>' || 
+					     sym == '%' || sym == '&' || sym == '^' || sym == ':' || sym == '|' || sym == '.' || sym == ',' || sym == '?' || sym == '~')
 
 				{
 					if (status == 1)
